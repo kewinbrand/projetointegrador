@@ -111,3 +111,13 @@ BEGIN
 	')
 END
 GO
+
+--CRIA OS DADOS INICIAIS
+
+--Insere os produtos iniciais
+INSERT INTO PRODUTO(Produto, NomeCompleto, QtdMiniEstoque, QtdLoteComprar) VALUES ('Sal', 'Sal Iodado Chines', 1, 5)
+INSERT INTO PRODUTO(Produto, NomeCompleto, QtdMiniEstoque, QtdLoteComprar) VALUES ('Manteiga', 'Manteiga 320 g Pluff', 5, 10)
+INSERT INTO PRODUTO(Produto, NomeCompleto, QtdMiniEstoque, QtdLoteComprar) VALUES ('Leite', 'Leita Da Vaca', 5, 10)
+INSERT INTO PRODUTO(Produto, NomeCompleto, QtdMiniEstoque, QtdLoteComprar) VALUES ('Bolacha', 'Sal Iodado Chines', 3, 6)
+INSERT INTO PRODUTO(Produto, NomeCompleto, QtdMiniEstoque, QtdLoteComprar) VALUES ('Trigo', 'Sal Iodado Chines', 2, 4)
+GO
