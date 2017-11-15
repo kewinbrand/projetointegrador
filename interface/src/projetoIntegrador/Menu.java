@@ -63,7 +63,7 @@ public class Menu extends JFrame {
 	 * Create the frame.
 	 */
 	public Menu() {
-		//setIconImage(Toolkit.getDefaultToolkit().getImage(Menu.class.getResource("arquivos/carrinhoicon.jpg")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Menu.class.getResource("arquivos/carrinhoicon.jpg")));
 		setTitle("MENU");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 500, 550);
@@ -164,7 +164,7 @@ public class Menu extends JFrame {
 		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setBounds(0, 0, 500, 528);
-		//lblNewLabel.setIcon(new ImageIcon(Menu.class.getResource("/proejto/itegrador/menu.png")));
+		lblNewLabel.setIcon(new ImageIcon(Menu.class.getResource("arquivos/menu.png")));
 		contentPane.add(lblNewLabel);
 		setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{lblNewLabel, contentPane}));
 	}
