@@ -73,22 +73,22 @@ BEGIN
 END
 GO
 
-IF NOT EXISTS(SELECT * FROM sys.triggers WHERE name = 'trMovimentaEstoque')
+IF NOT EXISTS(SELECT * FROM sys.triggers WHERE name = 'trVerificaNecessidadeReposicao')
 BEGIN
 	EXEC('
-	CREATE TRIGGER (trVerificaNecessidadeReposicao)
-	ON [MOVIMENTOESTOQUE]
-	AFTER INSERT
-	AS
-	BEGIN
-		DECLARE @Produto varchar(20), @Quantidade int
+		CREATE TRIGGER trVerificaNecessidadeReposicao
+		ON [MOVIMENTOESTOQUE]
+		AFTER INSERT
+		AS
+		BEGIN
+			DECLARE @Produto varchar(20), @Quantidade int
 	
-		SELECT @Produto = Produto, @Quantidade = Quantidade FROM INSERTED
+			SELECT @Produto = Produto, @Quantidade = Quantidade FROM INSERTED
 	
-		INSERT INTO MOVIMENTOESTOQUE(Produto, Quantidade)
-		VALUES (Produto, Quantidade)
+			INSERT INTO MOVIMENTOESTOQUE(Produto, Quantidade)
+			VALUES (@Produto, @Quantidade)
 	
-	END
+		END
 	')
 END
 GO
