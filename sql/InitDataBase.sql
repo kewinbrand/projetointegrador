@@ -1,3 +1,6 @@
+--USE master
+--DROP DATABASE PROJETO_INTEGRADOR
+
 --CRIA O BANCO DE DADOS
 USE master
 GO
@@ -64,9 +67,9 @@ BEGIN
 		DECLARE @Produto varchar(20), @Quantidade int
 	
 		SELECT @Produto = Produto, @Quantidade = Quantidade FROM INSERTED
-	
+		
 		INSERT INTO MOVIMENTOESTOQUE(Produto, Quantidade)
-		VALUES (@Produto, @Quantidade)
+		VALUES (@Produto, - @Quantidade)
 	
 	END
 	')
@@ -81,17 +84,30 @@ BEGIN
 		AFTER INSERT
 		AS
 		BEGIN
-			DECLARE @Produto varchar(20), @Quantidade int
-	
-			SELECT @Produto = Produto, @Quantidade = Quantidade FROM INSERTED
-	
-			INSERT INTO MOVIMENTOESTOQUE(Produto, Quantidade)
-			VALUES (@Produto, @Quantidade)
-	
+		DECLARE @PRODUTO VARCHAR(20)
+			DECLARE @QUANTIDADE INT
+			DECLARE @QTD_MINIMA INT
+			DECLARE @SALDO INT 
+			DECLARE @QTD_COMPRAR INT
+
+			--Coleta os dados inseridos na tabela
+			SELECT @PRODUTO = Produto, @QUANTIDADE = - Quantidade FROM INSERTED
+			--Colata o saldo do produto
+			SELECT @SALDO = SUM(Quantidade)  FROM MOVIMENTOESTOQUE WHERE Produto = @PRODUTO GROUP BY Produto
+			--Coleta a quantidade minima e a quantidade a comprar do lote, para o produto
+			SELECT @QTD_MINIMA = QtdMiniEstoque, @QTD_COMPRAR = QtdLoteComprar FROM PRODUTO WHERE PRODUTO = @PRODUTO
+
+			--Caso a quantidade minima seja maior que o saldo, solicita compra
+			IF (@QTD_MINIMA >= @SALDO)
+			BEGIN
+				INSERT INTO MOVIMENTOESTOQUE(Produto, Quantidade)
+				VALUES(@PRODUTO , @QTD_COMPRAR)
+			END
 		END
 	')
 END
 GO
+
 --CRIA AS STORED PROCEDURE
 IF NOT EXISTS(SELECT * FROM sys.objects WHERE name = 'spInsereVenda')
 BEGIN
@@ -121,3 +137,10 @@ INSERT INTO PRODUTO(Produto, NomeCompleto, QtdMiniEstoque, QtdLoteComprar) VALUE
 INSERT INTO PRODUTO(Produto, NomeCompleto, QtdMiniEstoque, QtdLoteComprar) VALUES ('Bolacha', 'Bolacha redonda', 3, 6)
 INSERT INTO PRODUTO(Produto, NomeCompleto, QtdMiniEstoque, QtdLoteComprar) VALUES ('Trigo', 'Trigo Branco', 2, 4)
 GO
+
+--Insere o saldo inicial
+INSERT INTO MOVIMENTOESTOQUE(Produto, Quantidade) VALUES('Sal', 5)
+INSERT INTO MOVIMENTOESTOQUE(Produto, Quantidade) VALUES('Manteiga', 10)
+INSERT INTO MOVIMENTOESTOQUE(Produto, Quantidade) VALUES('Leite', 10)
+INSERT INTO MOVIMENTOESTOQUE(Produto, Quantidade) VALUES('Bolacha', 6)
+INSERT INTO MOVIMENTOESTOQUE(Produto, Quantidade) VALUES('Trigo', 4)
