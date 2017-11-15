@@ -1,3 +1,13 @@
+USE master
+GO
+
+IF NOT EXISTS(SELECT * FROM sys.databases WHERE name = 'PROJETO_INTEGRADOR')
+	CREATE DATABASE PROJETO_INTEGRADOR
+GO
+
+USE PROJETO_INTEGRADOR
+GO
+
 CREATE TABLE PRODUTO(
   Produto varchar(20) not null,
   NomeCompleto varchar(100),
