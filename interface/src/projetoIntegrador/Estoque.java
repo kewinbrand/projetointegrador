@@ -43,7 +43,7 @@ public class Estoque extends JFrame {
 	 * Create the frame.
 	 */
 	public Estoque() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage(Estoque.class.getResource("/proejto/itegrador/carrinhoicon.jpg")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Estoque.class.getResource("arquivos/carrinhoicon.jpg")));
 		setTitle("ESTOQUE");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 550);
@@ -64,7 +64,7 @@ public class Estoque extends JFrame {
 		contentPane.add(button);
 		
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon(Estoque.class.getResource("/proejto/itegrador/estoque.png")));
+		lblNewLabel.setIcon(new ImageIcon(Estoque.class.getResource("arquivos/estoque.png")));
 		lblNewLabel.setBounds(0, 0, 494, 529);
 		contentPane.add(lblNewLabel);
 	}

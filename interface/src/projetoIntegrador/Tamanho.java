@@ -44,7 +44,7 @@ public class Tamanho extends JFrame {
 	 */
 	public Tamanho() {
 		setTitle("TAMANHO DO CARRINHO");
-		setIconImage(Toolkit.getDefaultToolkit().getImage(Tamanho.class.getResource("/proejto/itegrador/carrinhoicon.jpg")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Tamanho.class.getResource("arquivos/carrinhoicon.jpg")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(0, 0, 432, 300);
 		contentPane = new JPanel();
@@ -64,7 +64,7 @@ public class Tamanho extends JFrame {
 		contentPane.add(button);
 		
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon(Tamanho.class.getResource("/proejto/itegrador/tamanhocarrinho.png")));
+		lblNewLabel.setIcon(new ImageIcon(Tamanho.class.getResource("arquivos/tamanhocarrinho.png")));
 		lblNewLabel.setBounds(0, 0, 432, 275);
 		contentPane.add(lblNewLabel);
 	}

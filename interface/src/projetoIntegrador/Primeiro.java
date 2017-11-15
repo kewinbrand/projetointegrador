@@ -61,7 +61,7 @@ public class Primeiro extends JFrame {
 		contentPane.add(button);
 		
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon(Primeiro.class.getResource("/proejto/itegrador/primeiroitem.png")));
+		lblNewLabel.setIcon(new ImageIcon(Primeiro.class.getResource("arquivos/primeiroitem.png")));
 		lblNewLabel.setBounds(12, 0, 469, 286);
 		contentPane.add(lblNewLabel);
 	}

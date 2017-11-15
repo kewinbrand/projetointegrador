@@ -53,7 +53,7 @@ public class Compra extends JFrame {
 	 * Create the frame.
 	 */
 	public Compra() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage(Compra.class.getResource("/proejto/itegrador/carrinhoicon.jpg")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Compra.class.getResource("arquivos/carrinhoicon.jpg")));
 		setTitle("COMPRE AQUI");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 550);
@@ -148,7 +148,7 @@ public class Compra extends JFrame {
 		contentPane.add(lblAliquotaIcms);
 		
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon(Compra.class.getResource("/proejto/itegrador/compreaqui.png")));
+		lblNewLabel.setIcon(new ImageIcon(Compra.class.getResource("arquivos/compreaqui.png")));
 		lblNewLabel.setBounds(0, 0, 500, 529);
 		contentPane.add(lblNewLabel);
 		

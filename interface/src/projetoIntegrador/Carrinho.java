@@ -44,7 +44,7 @@ public class Carrinho extends JFrame {
 	 * Create the frame.
 	 */
 	public Carrinho() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage(Carrinho.class.getResource("/proejto/itegrador/carrinhoicon.jpg")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Carrinho.class.getResource("arquivos/carrinhoicon.jpg")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(0, 0, 500, 550);
 		contentPane = new JPanel();
@@ -64,7 +64,7 @@ public class Carrinho extends JFrame {
 		contentPane.add(button);
 		
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon(Carrinho.class.getResource("/proejto/itegrador/carrinho.png")));
+		lblNewLabel.setIcon(new ImageIcon(Carrinho.class.getResource("arquivos/carrinho.png")));
 		lblNewLabel.setBounds(0, 0, 493, 530);
 		contentPane.add(lblNewLabel);
 	}
