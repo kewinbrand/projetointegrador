@@ -77,6 +77,18 @@ public class Menu extends JFrame {
 			JOptionPane.showMessageDialog(rootPane, e.getMessage());
 		}
 	}
+	
+	private void abrirEstoque() {
+		try {
+			MenuAplicacao.abrirEstoque();
+		} catch (ExcecaoSql e) {
+			JOptionPane.showMessageDialog(rootPane, e.getMessage());
+		}
+	}
+	
+	private void abrirCarrinho() {
+		MenuAplicacao.abrirCarrinho();
+	}
 
 	/**
 	 * Create the frame.
@@ -108,7 +120,7 @@ public class Menu extends JFrame {
 		JButton btnCarrinhoDeCompras = new JButton("Carrinho");
 		btnCarrinhoDeCompras.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Carrinho.main(null);
+				abrirCarrinho();
 			}
 		});
 		btnCarrinhoDeCompras.setBackground(SystemColor.scrollbar);
@@ -117,9 +129,10 @@ public class Menu extends JFrame {
 		contentPane.add(btnCarrinhoDeCompras);
 		
 		JButton btnEstoque = new JButton("Estoque");
-		btnEstoque.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Estoque.main(null);
+		btnEstoque.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				abrirEstoque();
 			}
 		});
 		btnEstoque.setBackground(SystemColor.scrollbar);

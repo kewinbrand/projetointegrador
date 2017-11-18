@@ -1,9 +1,6 @@
 package sistemaVendas;
 
-import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.SQLException;
@@ -45,6 +42,10 @@ public class SistemaVendas {
 		DominioProduto _produto = new DominioProduto();
 		return _produto.buscarProdutos();
 	}	
+	
+	public Fila<Venda> buscarVendasEnfileiradas(){
+		return this._venda.buscarVendasEnfileiradas();
+	}
 	
 	public void recriarBancoDados() throws ExcecaoSql {
 		try {

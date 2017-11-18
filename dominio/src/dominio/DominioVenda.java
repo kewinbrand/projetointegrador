@@ -26,6 +26,10 @@ public class DominioVenda {
 		this.vendas.enfileirar(venda);		
 	}
 	
+	public Fila<Venda> buscarVendasEnfileiradas(){
+		return this.vendas;
+	}
+	
 	public void gravarVendas() throws ExcecaoSql{
 		PreparedStatement preparedStatement = null;
 		try {

@@ -35,6 +35,14 @@ public class Fila<T> {
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
+	public T item(int index) {
+		if(index > this.ultimoElemento) {
+			return null;
+		}
+		return (T) this.elementos[index];
+	}
+	
 	public Object[] mostraFila() {
 		return this.elementos;
 	}

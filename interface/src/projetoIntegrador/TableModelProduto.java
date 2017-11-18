@@ -37,10 +37,10 @@ public class TableModelProduto extends AbstractTableModel {
 	@Override
 	public Object getValueAt(int linha, int coluna) {
 		switch(coluna) {
-			case 0: return this.produtos.Item(linha).getCodigoProduto();
-			case 1: return this.produtos.Item(linha).getNomeCompleto();
-			case 2: return this.produtos.Item(linha).getQtdMinEstoque();
-			case 3: return this.produtos.Item(linha).getQtdLoteComprar();
+			case 0: return this.produtos.item(linha).getCodigoProduto();
+			case 1: return this.produtos.item(linha).getNomeCompleto();
+			case 2: return this.produtos.item(linha).getQtdMinEstoque();
+			case 3: return this.produtos.item(linha).getQtdLoteComprar();
 		}
 		return null;
 	}

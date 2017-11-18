@@ -1,8 +1,6 @@
 package projetoIntegrador;
 
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
+import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
@@ -13,39 +11,31 @@ import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Toolkit;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 
-public class Carrinho extends JFrame {
+public class Carrinho extends JDialog {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private JPanel contentPane;
+	public JPanel contentPane;
+	public JTable table;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Carrinho frame = new Carrinho();
-					frame.setResizable(false); //Bloqueia o maximizar 
-					frame.setVisible(true);
-					frame.setSize(500,550);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+	public static Carrinho mostrarCarrinho() {
+		Carrinho frame = new Carrinho();
+		frame.setResizable(false);
+		frame.setSize(500,550);
+		return frame;
 	}
-
-	/**
-	 * Create the frame.
-	 */
+	
 	public Carrinho() {
+		setTitle("Carrinho");
+		setModal(true);
+		setResizable(false);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Carrinho.class.getResource("arquivos/carrinhoicon.jpg")));
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setBounds(0, 0, 500, 550);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -60,8 +50,15 @@ public class Carrinho extends JFrame {
 		});
 		button.setFont(new Font("Candara", Font.BOLD, 14));
 		button.setBackground(SystemColor.scrollbar);
-		button.setBounds(68, 435, 131, 25);
+		button.setBounds(56, 421, 131, 25);
 		contentPane.add(button);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(48, 126, 420, 220);
+		contentPane.add(scrollPane);
+		
+		table = new JTable();
+		scrollPane.setViewportView(table);
 		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon(Carrinho.class.getResource("arquivos/carrinho.png")));
