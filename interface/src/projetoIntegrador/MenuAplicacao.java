@@ -1,6 +1,8 @@
 package projetoIntegrador;
 
 
+import java.awt.Window;
+
 import javax.swing.table.AbstractTableModel;
 
 import entidades.Produto;
@@ -22,6 +24,11 @@ public class MenuAplicacao {
 		}
 	}
 	
+	private static void configurarFormPadrao(Window form) {
+		form.setLocationRelativeTo(null);
+		form.setVisible(true);
+	}
+	
 	public static void abrirVendas() throws ExcecaoSql {
 		Fila<Produto> produtos = sistema.buscarProdutos();
 		Compra compra = Compra.novaVenda(sistema);			
@@ -32,7 +39,7 @@ public class MenuAplicacao {
 				compra.comboProduto.addItem(produto.getCodigoProduto());
 			}
 		}	
-		compra.setVisible(true);		
+		configurarFormPadrao(compra);
 	}
 	
 	public static void abrirEstoque() throws ExcecaoSql {
@@ -40,7 +47,7 @@ public class MenuAplicacao {
 		AbstractTableModel model = new TableModelProduto(produtos);
 		Estoque estoque = Estoque.abrirEstoque();
 		estoque.table.setModel(model);
-		estoque.setVisible(true);
+		configurarFormPadrao(estoque);
 	}
 	
 	public static void abrirCarrinho() {
@@ -48,11 +55,24 @@ public class MenuAplicacao {
 		AbstractTableModel model = new TableModelVenda(vendas);		
 		Carrinho carrinho = Carrinho.mostrarCarrinho();
 		carrinho.table.setModel(model);
-		carrinho.setVisible(true);
+		configurarFormPadrao(carrinho);
 	}
 	
 	public static int quantidadeItensCarrinho() {
 		return sistema.buscarVendasEnfileiradas().retornaTamanhoFila();
+	}
+	
+	public static void abrirPrimeiroItemCarrinho() {
+		Compra compra = Compra.novaVenda(sistema);
+		Venda venda = sistema.buscarPrimeiraVendaEnfileirada();
+		compra.comboProduto.addItem(venda.getCodigoProduto());
+		compra.comboProduto.setSelectedItem(venda.getCodigoProduto());
+		compra.textFieldAliq.setText(venda.getAliquotaICMS().toString());
+		compra.textFieldDesc.setText(venda.getDesconto().toString());
+		compra.textFieldObs.setText(venda.getObs());
+		compra.textFieldQuantidade.setText(String.valueOf(venda.getQuantidade()));
+		compra.textFieldValor.setText(venda.getValorUn().toString());
+		configurarFormPadrao(compra);
 	}
 	
 	public static void recriarBancoDados() throws ExcecaoSql {

@@ -43,6 +43,10 @@ public class SistemaVendas {
 		return _produto.buscarProdutos();
 	}	
 	
+	public Venda buscarPrimeiraVendaEnfileirada() {
+		return this._venda.buscarVendasEnfileiradas().retornaPrimeiroElemento();
+	}
+	
 	public Fila<Venda> buscarVendasEnfileiradas(){
 		return this._venda.buscarVendasEnfileiradas();
 	}

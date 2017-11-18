@@ -55,6 +55,7 @@ public class Menu extends JFrame {
 					frame.setResizable(false); //Bloqueia o maximizar 
 					frame.setVisible(true);
 					frame.setSize(500,550);
+					frame.setLocationRelativeTo(null);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -62,37 +63,62 @@ public class Menu extends JFrame {
 		});
 	}
 	
+	private void defaultExceptionHandler(Exception exception) {
+		StringBuilder excptMessage = new StringBuilder();
+		if(exception instanceof ExcecaoSql) {
+			excptMessage.append(exception.getMessage());
+		}else {
+			excptMessage.append("Deu ruim: ");
+			excptMessage.append(exception.getMessage());
+		}
+		JOptionPane.showMessageDialog(rootPane, excptMessage.toString());
+	}
+	
 	private void abrirVendas() {
 		try {
 			MenuAplicacao.abrirVendas();
-		} catch (ExcecaoSql e) {
-			JOptionPane.showMessageDialog(rootPane, e.getMessage());
+		} catch (Exception e) {
+			defaultExceptionHandler(e);
 		}
 	}
 	
 	private void conectarBancoDados() {
 		try {
 			MenuAplicacao.recriarBancoDados();
-		} catch (ExcecaoSql e) {
-			JOptionPane.showMessageDialog(rootPane, e.getMessage());
+		} catch (Exception e) {
+			defaultExceptionHandler(e);
 		}
 	}
 	
 	private void abrirEstoque() {
 		try {
 			MenuAplicacao.abrirEstoque();
-		} catch (ExcecaoSql e) {
-			JOptionPane.showMessageDialog(rootPane, e.getMessage());
+		} catch (Exception e) {
+			defaultExceptionHandler(e);
 		}
 	}
 	
 	private void abrirCarrinho() {
-		MenuAplicacao.abrirCarrinho();
+		try {
+			MenuAplicacao.abrirCarrinho();
+		}
+		catch (Exception e) {
+			defaultExceptionHandler(e);
+		}
 	}
 	
 	private void abrirQuantidadeItensCarrinho() {
 		String itensCarrinho = String.valueOf(MenuAplicacao.quantidadeItensCarrinho());
 		JOptionPane.showMessageDialog(rootPane, "Atualmente existem "+itensCarrinho+" itens no carrinho.", "Itens Carrinho", DISPOSE_ON_CLOSE, null);
+	}
+	
+	private void abrirPrimeiroItemCarrinho() {
+		try {
+			MenuAplicacao.abrirPrimeiroItemCarrinho();
+		}
+		catch (Exception e) {
+			defaultExceptionHandler(e);
+		}
 	}
 
 	/**
@@ -159,9 +185,10 @@ public class Menu extends JFrame {
 		contentPane.add(btnTamanhoDoCarrinho);
 		
 		JButton btnItem = new JButton("1\u00BA Item");
-		btnItem.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Primeiro.main(null);
+		btnItem.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				abrirPrimeiroItemCarrinho();
 			}
 		});
 		btnItem.setBackground(SystemColor.scrollbar);

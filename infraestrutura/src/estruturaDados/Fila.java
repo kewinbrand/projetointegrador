@@ -43,15 +43,17 @@ public class Fila<T> {
 		return (T) this.elementos[index];
 	}
 	
-	public Object[] mostraFila() {
-		return this.elementos;
+	@SuppressWarnings("unchecked")
+	public T[] mostraFila() {
+		return (T[]) this.elementos;
 	}
 	
-	public Object retornaPrimeiroElemento() {
+	@SuppressWarnings("unchecked")
+	public T retornaPrimeiroElemento() {
 		if(this.filaVazia()) {
 			return null;
 		}else {
-			return this.elementos[0];
+			return (T) this.elementos[0];
 		}
 	}
 	

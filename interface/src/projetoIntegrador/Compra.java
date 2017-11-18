@@ -1,6 +1,5 @@
 package projetoIntegrador;
 
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -14,6 +13,7 @@ import javax.swing.ImageIcon;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JTextField;
 import java.awt.Toolkit;
 import javax.swing.JButton;
@@ -23,12 +23,11 @@ import java.awt.SystemColor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class Compra extends JFrame {
+public class Compra extends JDialog {
 
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
+	
 	public JPanel contentPane;
 	public JTextField textFieldQuantidade;
 	public JTextField textFieldValor;
@@ -37,8 +36,7 @@ public class Compra extends JFrame {
 	public JTextField textFieldObs;
 	public JComboBox<String> comboProduto;
 	
-	private SistemaVendas sistema;
-	
+	private SistemaVendas sistema;	
 	
 	public static Compra novaVenda(SistemaVendas sistema) {
 		Compra frame = new Compra();
@@ -63,9 +61,11 @@ public class Compra extends JFrame {
 	 * Create the frame.
 	 */
 	public Compra() {
+		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		setResizable(false);
+		setModal(true);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Compra.class.getResource("arquivos/carrinhoicon.jpg")));
 		setTitle("COMPRE AQUI");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 550);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
