@@ -77,6 +77,11 @@ public class MenuAplicacao {
 		compra.textFieldQuantidade.setText(String.valueOf(venda.getQuantidade()));
 		compra.textFieldValor.setText(venda.getValorUn().toString());
 		compra.btnFinalizar.setVisible(false);
+		compra.textFieldAliq.setEditable(false);
+		compra.textFieldDesc.setEditable(false);
+		compra.textFieldObs.setEditable(false);
+		compra.textFieldQuantidade.setEditable(false);
+		compra.textFieldValor.setEditable(false);
 		configurarFormPadrao(compra);
 	}
 	
