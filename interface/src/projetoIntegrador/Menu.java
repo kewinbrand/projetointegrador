@@ -89,6 +89,11 @@ public class Menu extends JFrame {
 	private void abrirCarrinho() {
 		MenuAplicacao.abrirCarrinho();
 	}
+	
+	private void abrirQuantidadeItensCarrinho() {
+		String itensCarrinho = String.valueOf(MenuAplicacao.quantidadeItensCarrinho());
+		JOptionPane.showMessageDialog(rootPane, "Atualmente existem "+itensCarrinho+" itens no carrinho.", "Itens Carrinho", DISPOSE_ON_CLOSE, null);
+	}
 
 	/**
 	 * Create the frame.
@@ -143,7 +148,7 @@ public class Menu extends JFrame {
 		JButton btnTamanhoDoCarrinho = new JButton("Tamanho");
 		btnTamanhoDoCarrinho.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Tamanho.main(null);
+				abrirQuantidadeItensCarrinho();
 			}
 		});
 		btnTamanhoDoCarrinho.setBackground(SystemColor.scrollbar);

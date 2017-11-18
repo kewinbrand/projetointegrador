@@ -51,6 +51,10 @@ public class MenuAplicacao {
 		carrinho.setVisible(true);
 	}
 	
+	public static int quantidadeItensCarrinho() {
+		return sistema.buscarVendasEnfileiradas().retornaTamanhoFila();
+	}
+	
 	public static void recriarBancoDados() throws ExcecaoSql {
 		sistema.recriarBancoDados();
 	}
