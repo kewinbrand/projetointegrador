@@ -8,14 +8,13 @@ import javax.swing.border.EmptyBorder;
 import org.eclipse.wb.swing.FocusTraversalOnArray;
 
 import utilidades.ExcecaoSql;
+import utilidades.Utilidades;
 import utilidades.ValidacaoException;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 
-import java.applet.Applet;
-import java.applet.AudioClip;
 import java.awt.Component;
 import java.awt.Toolkit;
 import javax.swing.JButton;
@@ -30,14 +29,6 @@ import java.awt.event.MouseEvent;
 public class Menu extends JFrame {
 	
 	
-	//Função de tocar som
-	public void tocarSom(String somCaixa)
-	 {
-		 java.net.URL url = getClass().getResource(somCaixa+".wav");
-		 AudioClip audio = Applet.newAudioClip(url);
-		 audio.play();
-	 }
-
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	
@@ -114,6 +105,14 @@ public class Menu extends JFrame {
 			MenuAplicacao.abrirPrimeiroItemCarrinho();
 		}
 		catch (Exception e) {
+			defaultExceptionHandler(e);
+		}
+	}
+	
+	private void gravarVendasBancoDados() {
+		try {
+			Utilidades.tocarSom(getClass().getResource("arquivos/somcaixa.wav").toString().replace("file:/", ""));
+		} catch (Exception e) {
 			defaultExceptionHandler(e);
 		}
 	}
@@ -195,13 +194,13 @@ public class Menu extends JFrame {
 		contentPane.add(btnItem);
 		
 		JButton btnGravarVenda = new JButton("Gravar Vendas");
-		btnGravarVenda.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				tocarSom("somcaixa");  //Chama a função de tocar som
-				
+		btnGravarVenda.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				gravarVendasBancoDados();
 			}
 		});
+		
 		btnGravarVenda.setBackground(SystemColor.scrollbar);
 		btnGravarVenda.setToolTipText("");
 		btnGravarVenda.setFont(new Font("Candara", Font.BOLD, 19));

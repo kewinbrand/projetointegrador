@@ -25,7 +25,6 @@ import java.awt.event.MouseEvent;
 
 public class Compra extends JDialog {
 
-
 	private static final long serialVersionUID = 1L;
 	
 	public JPanel contentPane;
