@@ -64,11 +64,11 @@ public class Menu extends JFrame {
 		StringBuilder excptMessage = new StringBuilder();
 		if((exception instanceof ExcecaoSql) || (exception instanceof ValidacaoException)) {
 			excptMessage.append(exception.getMessage());
+			JOptionPane.showMessageDialog(rootPane, excptMessage.toString(), "Verifique", JOptionPane.INFORMATION_MESSAGE);
 		}else {			
-			excptMessage.append(String.format("Deu ruim!!!!!!!!!!!!!!!!!!!!!!!!!!!! %n %s", exception.getMessage()));
-			
+			excptMessage.append(String.format("Deu ruim!!!!!!!!!!!!!!!!!!!!!!!!!!!! %n %s", exception.getMessage()));		
+			JOptionPane.showMessageDialog(rootPane, excptMessage.toString(), "Ovos não eram pra ser verdes...", JOptionPane.ERROR_MESSAGE);
 		}
-		JOptionPane.showMessageDialog(rootPane, excptMessage.toString(), "Ovos não eram pra ser verdes...", JOptionPane.ERROR_MESSAGE);
 	}
 	
 	private void abrirVendas() {
@@ -106,7 +106,7 @@ public class Menu extends JFrame {
 	
 	private void abrirQuantidadeItensCarrinho() {
 		String itensCarrinho = String.valueOf(MenuAplicacao.quantidadeItensCarrinho());
-		JOptionPane.showMessageDialog(rootPane, "Atualmente existem "+itensCarrinho+" itens no carrinho.", "Itens Carrinho", DISPOSE_ON_CLOSE, null);
+		JOptionPane.showMessageDialog(rootPane, "Atualmente existem "+itensCarrinho+" itens no carrinho.", "Itens do Carrinho", DISPOSE_ON_CLOSE, null);
 	}
 	
 	private void abrirPrimeiroItemCarrinho() {
