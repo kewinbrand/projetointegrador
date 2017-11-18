@@ -13,6 +13,7 @@ import entidades.Produto;
 import entidades.Venda;
 import estruturaDados.Fila;
 import utilidades.ExcecaoSql;
+import utilidades.Utilidades;
 
 public class SistemaVendas {
 	
@@ -29,10 +30,6 @@ public class SistemaVendas {
 		Conexao.getInstance().conectarBancoDados(CONEXAO);
 	}
 	
-	private String buscarArquivoCriacaoBanco(String filePath) throws IOException {
-		String content = new String(Files.readAllBytes(Paths.get(filePath)));
-		return content;
-	}
 	
 	public void novaVenda(Venda venda) {
 		this._venda.realizarVenda(venda);
@@ -56,11 +53,11 @@ public class SistemaVendas {
 			String sql = null;
 			Conexao.getInstance().desconectarBancoDados();
 			Conexao.getInstance().conectarBancoDados(CONEXAO_MASTER);
-			sql = buscarArquivoCriacaoBanco("..\\sql\\create-database.sql");
+			sql = Utilidades.lerArquivoDisco("..\\sql\\create-database.sql");
 			Conexao.getInstance().executarSqlIndependente(sql);
 			Conexao.getInstance().desconectarBancoDados();
 			Conexao.getInstance().conectarBancoDados(CONEXAO);
-			sql = buscarArquivoCriacaoBanco("..\\sql\\InitDataBase-sem-go.sql");
+			sql =Utilidades.lerArquivoDisco("..\\sql\\InitDataBase-sem-go.sql");
 			Conexao.getInstance().executarSqlIndependente(sql);
 		} catch (ClassNotFoundException | SQLException | IOException e) {
 			throw new ExcecaoSql(e.getMessage());
