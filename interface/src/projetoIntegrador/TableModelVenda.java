@@ -35,12 +35,12 @@ public class TableModelVenda extends AbstractTableModel {
 	@Override
 	public Object getValueAt(int linha, int coluna) {
 		switch(coluna) {
-			case 0: return this.vendas.item(coluna).getCodigoProduto();
-			case 1: return this.vendas.item(coluna).getQuantidade();
-			case 2: return this.vendas.item(coluna).getValorUn();
-			case 3: return this.vendas.item(coluna).getDesconto();
-			case 4: return this.vendas.item(coluna).getAliquotaICMS();
-			case 5: return this.vendas.item(coluna).getObs();
+			case 0: return this.vendas.item(linha).getCodigoProduto();
+			case 1: return this.vendas.item(linha).getQuantidade();
+			case 2: return this.vendas.item(linha).getValorUn();
+			case 3: return this.vendas.item(linha).getDesconto();
+			case 4: return this.vendas.item(linha).getAliquotaICMS();
+			case 5: return this.vendas.item(linha).getObs();
 		}
 		return null;
 	}
