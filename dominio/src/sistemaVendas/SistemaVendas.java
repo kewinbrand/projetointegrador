@@ -71,12 +71,9 @@ public class SistemaVendas {
 		
 		try {
 			IniciarConexaoBanco();
-		} catch (ClassNotFoundException e) {
-			throw new ExcecaoSql(e.getMessage());
-		} catch (SQLException e) {
+		} catch (ClassNotFoundException | SQLException e) {
 			throw new ExcecaoSql(e.getMessage());
 		}
-		
 	}
 
 	

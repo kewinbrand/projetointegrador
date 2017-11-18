@@ -34,11 +34,9 @@ public class MenuAplicacao {
 		Fila<Produto> produtos = sistema.buscarProdutos();
 		Compra compra = Compra.novaVenda(sistema);			
 		int tam = produtos.retornaTamanhoFila();
-		for (int i = 0; i <= tam; i++) {
-			Produto produto = produtos.desenfileirar();
-			if(produto != null) {
-				compra.comboProduto.addItem(produto.getCodigoProduto());
-			}
+		for (int i = 0; i < tam; i++) {
+			Produto produto = produtos.desenfileirar();			
+			compra.comboProduto.addItem(produto.getCodigoProduto());			
 		}	
 		configurarFormPadrao(compra);
 	}
