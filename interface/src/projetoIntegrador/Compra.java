@@ -48,12 +48,22 @@ public class Compra extends JDialog {
 		return frame;
 	}
 	
+	private void limparCampos() {
+		this.textFieldQuantidade.setText(null);
+		this.textFieldValor.setText(null);
+		this.textFieldDesc.setText(null);
+		this.textFieldAliq.setText(null);
+		this.textFieldObs.setText(null);
+		this.comboProduto.setSelectedIndex(0);
+	}
+	
 	private void realizarVenda() {
 		try {
 			Venda venda = Venda.criarVenda((String)comboProduto.getSelectedItem(), textFieldQuantidade.getText(), textFieldValor.getText(), textFieldDesc.getText(), 
 					textFieldAliq.getText(), textFieldObs.getText());
 			sistema.novaVenda(venda);
 			JOptionPane.showMessageDialog(rootPane, "Venda realizada com sucesso.");
+			limparCampos();
 		} catch (ValidacaoException e) {
 			JOptionPane.showMessageDialog(rootPane, e.getMessage());
 		}
