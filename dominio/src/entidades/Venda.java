@@ -7,9 +7,9 @@ import utilidades.ValidacaoException;
 public class Venda {
 	
 	public static Venda criarVenda(String codigoProduto, String quantidade, String valorUnitario,
-			String desconto, String aliquotaIcms, String obs) throws ValidacaoException {		
-		
+			String desconto, String aliquotaIcms, String obs) throws ValidacaoException {	
 		Venda venda = new Venda();
+		venda.validarVenda(codigoProduto, quantidade, valorUnitario, desconto, aliquotaIcms, obs);
 		venda.setCodigoProduto(codigoProduto);
 		venda.setAliquotaICMS(new BigDecimal(aliquotaIcms));
 		venda.setQuantidade(Integer.parseInt(quantidade));
@@ -32,33 +32,33 @@ public class Venda {
 		try {
 		    qtd =  Integer.parseInt(quantidade);
 		} catch (NumberFormatException e) {
-			msgErro.append("A quantidade não é um valor válido.");
+			msgErro.append("A quantidade não é um valor válido.\n");
 		}
 		
 		try {
 			valUnit = new BigDecimal(valorUnitario);
 		} catch (NumberFormatException e) {
-			msgErro.append("O valor unitário não é um valor válido.");
+			msgErro.append("O valor unitário não é um valor válido.\n");
 		}
 		
 		try {
 			_desconto = new BigDecimal(desconto);
 		} catch (NumberFormatException e) {
-			msgErro.append("O desconto não é um valor válido.");
+			msgErro.append("O desconto não é um valor válido.\n");
 		}
 		
 		try {
 			_aliquotaIcms = new BigDecimal(aliquotaIcms);
 		} catch (NumberFormatException e) {
-			msgErro.append("A aliquota ICMS não é um valor válido.");
+			msgErro.append("A aliquota ICMS não é um valor válido.\n");
 		}		
 		
 		if(codigoProduto.isEmpty()) {
-			msgErro.append("O código do produto não pode estar vazio.");
+			msgErro.append("O código do produto não pode estar vazio.\n");
 		}
 		
 		if(qtd == 0) {
-			msgErro.append("A quantidade não pode ser 0");
+			msgErro.append("A quantidade não pode ser 0\n");
 		}
 		
 		if(valUnit.intValue() == 0) {
@@ -73,10 +73,10 @@ public class Venda {
 	public void validarVenda(Venda venda) throws ValidacaoException {
 		StringBuilder msgErro = new StringBuilder();
 		if (venda.getQuantidade() == 0) {
-			msgErro.append("A quantidade não pode ser 0");
+			msgErro.append("A quantidade não pode ser 0\n");
 		}
 		if(venda.getCodigoProduto().isEmpty()) {
-			msgErro.append("O código do produto não pode estar vazio.");
+			msgErro.append("O código do produto não pode estar vazio.\n");
 		}
 		if(venda.getValorUn().intValue() == 0) {
 			msgErro.append("O valor unitário não pode ser 0.");

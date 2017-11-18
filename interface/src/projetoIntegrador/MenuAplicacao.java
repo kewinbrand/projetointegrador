@@ -10,6 +10,7 @@ import entidades.Venda;
 import estruturaDados.Fila;
 import sistemaVendas.SistemaVendas;
 import utilidades.ExcecaoSql;
+import utilidades.ValidacaoException;
 
 public class MenuAplicacao {
 	
@@ -62,9 +63,12 @@ public class MenuAplicacao {
 		return sistema.buscarVendasEnfileiradas().retornaTamanhoFila();
 	}
 	
-	public static void abrirPrimeiroItemCarrinho() {
+	public static void abrirPrimeiroItemCarrinho() throws ValidacaoException {
 		Compra compra = Compra.novaVenda(sistema);
 		Venda venda = sistema.buscarPrimeiraVendaEnfileirada();
+		if(venda == null) {
+			throw new ValidacaoException("Não há nenhuma venda.");
+		}
 		compra.comboProduto.addItem(venda.getCodigoProduto());
 		compra.comboProduto.setSelectedItem(venda.getCodigoProduto());
 		compra.textFieldAliq.setText(venda.getAliquotaICMS().toString());
@@ -72,6 +76,7 @@ public class MenuAplicacao {
 		compra.textFieldObs.setText(venda.getObs());
 		compra.textFieldQuantidade.setText(String.valueOf(venda.getQuantidade()));
 		compra.textFieldValor.setText(venda.getValorUn().toString());
+		compra.btnFinalizar.setVisible(false);
 		configurarFormPadrao(compra);
 	}
 	

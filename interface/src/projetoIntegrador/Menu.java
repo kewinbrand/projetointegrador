@@ -8,6 +8,7 @@ import javax.swing.border.EmptyBorder;
 import org.eclipse.wb.swing.FocusTraversalOnArray;
 
 import utilidades.ExcecaoSql;
+import utilidades.ValidacaoException;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -32,14 +33,11 @@ public class Menu extends JFrame {
 	//Função de tocar som
 	public void tocarSom(String somCaixa)
 	 {
-	 java.net.URL url = getClass().getResource(somCaixa+".wav");
-	 AudioClip audio = Applet.newAudioClip(url);
-	 audio.play();
+		 java.net.URL url = getClass().getResource(somCaixa+".wav");
+		 AudioClip audio = Applet.newAudioClip(url);
+		 audio.play();
 	 }
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	
@@ -49,8 +47,7 @@ public class Menu extends JFrame {
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				try { 
-					 
+				try { 					 
 					Menu frame = new Menu();
 					frame.setResizable(false); //Bloqueia o maximizar 
 					frame.setVisible(true);
@@ -65,13 +62,13 @@ public class Menu extends JFrame {
 	
 	private void defaultExceptionHandler(Exception exception) {
 		StringBuilder excptMessage = new StringBuilder();
-		if(exception instanceof ExcecaoSql) {
+		if((exception instanceof ExcecaoSql) || (exception instanceof ValidacaoException)) {
 			excptMessage.append(exception.getMessage());
-		}else {
-			excptMessage.append("Deu ruim: ");
-			excptMessage.append(exception.getMessage());
+		}else {			
+			excptMessage.append(String.format("Deu ruim!!!!!!!!!!!!!!!!!!!!!!!!!!!! %n %s", exception.getMessage()));
+			
 		}
-		JOptionPane.showMessageDialog(rootPane, excptMessage.toString());
+		JOptionPane.showMessageDialog(rootPane, excptMessage.toString(), "Ovos não eram pra ser verdes...", JOptionPane.ERROR_MESSAGE);
 	}
 	
 	private void abrirVendas() {

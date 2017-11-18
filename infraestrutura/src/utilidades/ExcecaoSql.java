@@ -2,9 +2,6 @@ package utilidades;
 
 public class ExcecaoSql extends Exception {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	public ExcecaoSql(String exceptionMessage) {

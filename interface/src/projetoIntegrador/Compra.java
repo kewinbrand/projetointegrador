@@ -35,6 +35,8 @@ public class Compra extends JDialog {
 	public JTextField textFieldAliq;
 	public JTextField textFieldObs;
 	public JComboBox<String> comboProduto;
+	public JButton btnFinalizar;
+	public JButton btnVoltar;
 	
 	private SistemaVendas sistema;	
 	
@@ -48,7 +50,7 @@ public class Compra extends JDialog {
 	
 	private void realizarVenda() {
 		try {
-			Venda venda = Venda.criarVenda(comboProduto.getName(), textFieldQuantidade.getText(), textFieldValor.getText(), textFieldDesc.getText(), 
+			Venda venda = Venda.criarVenda((String)comboProduto.getSelectedItem(), textFieldQuantidade.getText(), textFieldValor.getText(), textFieldDesc.getText(), 
 					textFieldAliq.getText(), textFieldObs.getText());
 			sistema.novaVenda(venda);
 			JOptionPane.showMessageDialog(rootPane, "Venda realizada com sucesso.");
@@ -102,7 +104,7 @@ public class Compra extends JDialog {
 		textFieldObs.setBounds(256, 350, 131, 22);
 		contentPane.add(textFieldObs);
 		
-		JButton btnVoltar = new JButton("VOLTAR");
+		btnVoltar = new JButton("VOLTAR");
 		btnVoltar.setBackground(SystemColor.scrollbar);
 		btnVoltar.setFont(new Font("Candara", Font.BOLD, 14));
 		btnVoltar.addActionListener(new ActionListener() {
@@ -113,7 +115,7 @@ public class Compra extends JDialog {
 			}
 		});
 		
-		JButton btnFinalizar = new JButton("FINALIZAR");
+		btnFinalizar = new JButton("FINALIZAR");
 		btnFinalizar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {				
