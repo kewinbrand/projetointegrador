@@ -7,7 +7,10 @@ import javax.swing.border.EmptyBorder;
 
 import org.eclipse.wb.swing.FocusTraversalOnArray;
 
+import utilidades.ExcecaoSql;
+
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 
 import java.applet.Applet;
@@ -19,6 +22,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
 import java.awt.SystemColor;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
  
 
 public class Menu extends JFrame {
@@ -37,14 +42,12 @@ public class Menu extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-
+	
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
-			
-
 			public void run() {
 				try { 
 					 
@@ -57,6 +60,22 @@ public class Menu extends JFrame {
 				}
 			}
 		});
+	}
+	
+	private void abrirVendas() {
+		try {
+			MenuAplicacao.abrirVendas();
+		} catch (ExcecaoSql e) {
+			JOptionPane.showMessageDialog(rootPane, e.getMessage());
+		}
+	}
+	
+	private void conectarBancoDados() {
+		try {
+			MenuAplicacao.recriarBancoDados();
+		} catch (ExcecaoSql e) {
+			JOptionPane.showMessageDialog(rootPane, e.getMessage());
+		}
 	}
 
 	/**
@@ -79,9 +98,8 @@ public class Menu extends JFrame {
 		btnNewButton.setBackground(SystemColor.scrollbar);
 		btnNewButton.setFont(new Font("Candara", Font.BOLD, 19));
 		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				
-				Compra.main(null);
+			public void actionPerformed(ActionEvent arg0) {			
+				abrirVendas();				
 			}
 		});
 		btnNewButton.setBounds(60, 140, 155, 50);
@@ -161,6 +179,16 @@ public class Menu extends JFrame {
 		btnSair.setFont(new Font("Candara", Font.BOLD, 19));
 		btnSair.setBounds(60, 331, 369, 24);
 		contentPane.add(btnSair);
+		
+		JButton btnRecriar = new JButton("Recriar Database");
+		btnRecriar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				conectarBancoDados();
+			}
+		});
+		btnRecriar.setBounds(10, 477, 115, 23);
+		contentPane.add(btnRecriar);
 		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setBounds(0, 0, 500, 528);

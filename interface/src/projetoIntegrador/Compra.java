@@ -1,10 +1,15 @@
 package projetoIntegrador;
-import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import entidades.Venda;
+import sistemaVendas.SistemaVendas;
+import utilidades.ValidacaoException;
+
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import java.awt.Font;
 import javax.swing.SwingConstants;
@@ -15,6 +20,8 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.SystemColor;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class Compra extends JFrame {
 
@@ -22,31 +29,34 @@ public class Compra extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private JPanel contentPane;
-	private JTextField textFieldQuantidade;
-	private JTextField textFieldValor;
-	private JTextField textFieldDesc;
-	private JTextField textFieldAliq;
-	private JTextField textFieldObs;
-
-	/**
-	 * Launch the application.
-	 */
+	public JPanel contentPane;
+	public JTextField textFieldQuantidade;
+	public JTextField textFieldValor;
+	public JTextField textFieldDesc;
+	public JTextField textFieldAliq;
+	public JTextField textFieldObs;
+	public JComboBox<String> comboProduto;
+	
+	private SistemaVendas sistema;
 	
 	
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Compra frame = new Compra();
-					frame.setResizable(false);
-					frame.setVisible(true);
-					frame.setSize(500,550); //Muda tamnho do frame
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+	public static Compra novaVenda(SistemaVendas sistema) {
+		Compra frame = new Compra();
+		frame.sistema = sistema;
+		frame.setResizable(false);
+		frame.setSize(500,550);
+		return frame;
+	}
+	
+	private void realizarVenda() {
+		try {
+			Venda venda = Venda.criarVenda(comboProduto.getName(), textFieldQuantidade.getText(), textFieldValor.getText(), textFieldDesc.getText(), 
+					textFieldAliq.getText(), textFieldObs.getText());
+			sistema.novaVenda(venda);
+			JOptionPane.showMessageDialog(rootPane, "Venda realizada com sucesso.");
+		} catch (ValidacaoException e) {
+			JOptionPane.showMessageDialog(rootPane, e.getMessage());
+		}
 	}
 
 	/**
@@ -63,7 +73,7 @@ public class Compra extends JFrame {
 		contentPane.setSize(500,550);
 		contentPane.setLayout(null);
 		
-		JComboBox<Object> comboProduto = new JComboBox<Object>();
+		comboProduto = new JComboBox<String>();
 		comboProduto.setBounds(256, 150, 131, 22);
 		contentPane.add(comboProduto);
 		
@@ -104,6 +114,12 @@ public class Compra extends JFrame {
 		});
 		
 		JButton btnFinalizar = new JButton("FINALIZAR");
+		btnFinalizar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {				
+				realizarVenda();				
+			}
+		});
 		btnFinalizar.setBackground(SystemColor.scrollbar);
 		btnFinalizar.setFont(new Font("Candara", Font.BOLD, 14));
 		btnFinalizar.setBounds(65, 389, 131, 25);
@@ -155,5 +171,6 @@ public class Compra extends JFrame {
 		JLabel label = new JLabel("");
 		label.setBounds(88, 160, 56, 16);
 		contentPane.add(label);
+		
 	}
 }

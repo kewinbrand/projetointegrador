@@ -1,23 +1,4 @@
---USE master
---DROP DATABASE PROJETO_INTEGRADOR
 
---CRIA O BANCO DE DADOS
-USE master
-GO
-
-IF EXISTS(SELECT * FROM sys.databases WHERE name = 'PROJETO_INTEGRADOR')
-BEGIN
-	DROP DATABASE PROJETO_INTEGRADOR
-END
-GO
-
-CREATE DATABASE PROJETO_INTEGRADOR
-GO
-
-USE PROJETO_INTEGRADOR
-GO
-
---CRIA TODAS AS TABELAS
 IF NOT EXISTS(SELECT * FROM sys.tables WHERE name = 'PRODUTO')
 BEGIN
 	CREATE TABLE PRODUTO(
@@ -29,7 +10,7 @@ BEGIN
 	  CONSTRAINT PK_PRODUTO PRIMARY KEY (Produto)
 	)
 END
-GO
+
 
 IF NOT EXISTS(SELECT * FROM sys.tables WHERE name = 'VENDA')
 BEGIN
@@ -44,7 +25,7 @@ BEGIN
 	  CONSTRAINT FK_VENDA_PRODUTO FOREIGN KEY (Produto) REFERENCES Produto(Produto)
 	)
 END
-GO
+
 
 
 IF NOT EXISTS(SELECT * FROM sys.tables WHERE name = 'MOVIMENTOESTOQUE')
@@ -58,7 +39,7 @@ BEGIN
 	  CONSTRAINT FK_MOVIMENTOESTOQUE_PRODUTO FOREIGN KEY (Produto) REFERENCES Produto(Produto)  
 	)
 END
-GO
+
 
 --CRIA TODAS AS TRIGGER's
 IF NOT EXISTS(SELECT * FROM sys.triggers WHERE name = 'trMovimentaEstoque')
@@ -79,7 +60,7 @@ BEGIN
 	END
 	')
 END
-GO
+
 
 IF NOT EXISTS(SELECT * FROM sys.triggers WHERE name = 'trVerificaNecessidadeReposicao')
 BEGIN
@@ -111,7 +92,7 @@ BEGIN
 		END
 	')
 END
-GO
+
 
 --CRIA AS STORED PROCEDURE
 IF NOT EXISTS(SELECT * FROM sys.objects WHERE name = 'spInsereVenda')
@@ -131,7 +112,7 @@ BEGIN
 		END
 	')
 END
-GO
+
 
 --CRIA OS DADOS INICIAIS
 
@@ -140,12 +121,12 @@ INSERT INTO PRODUTO(Produto, NomeCompleto, QtdMiniEstoque, QtdLoteComprar) VALUE
 INSERT INTO PRODUTO(Produto, NomeCompleto, QtdMiniEstoque, QtdLoteComprar) VALUES ('Manteiga', 'Manteiga 320 g Pluff', 5, 10)
 INSERT INTO PRODUTO(Produto, NomeCompleto, QtdMiniEstoque, QtdLoteComprar) VALUES ('Leite', 'Leita Da Vaca', 5, 10)
 INSERT INTO PRODUTO(Produto, NomeCompleto, QtdMiniEstoque, QtdLoteComprar) VALUES ('Bolacha', 'Bolacha redonda', 3, 6)
-INSERT INTO PRODUTO(Produto, NomeCompleto, QtdMiniEstoque, QtdLoteComprar) VALUES ('Trigo', 'Trigo Branco', 2, 4)
-GO
+INSERT INTO PRODUTO(Produto, NomeCompleto, QtdMiniEstoque, QtdLoteComprar) VALUES ('Tri', 'Tri Branco', 2, 4)
+
 
 --Insere o saldo inicial
 INSERT INTO MOVIMENTOESTOQUE(Produto, Quantidade) VALUES('Sal', 5)
 INSERT INTO MOVIMENTOESTOQUE(Produto, Quantidade) VALUES('Manteiga', 10)
 INSERT INTO MOVIMENTOESTOQUE(Produto, Quantidade) VALUES('Leite', 10)
 INSERT INTO MOVIMENTOESTOQUE(Produto, Quantidade) VALUES('Bolacha', 6)
-INSERT INTO MOVIMENTOESTOQUE(Produto, Quantidade) VALUES('Trigo', 4)
+INSERT INTO MOVIMENTOESTOQUE(Produto, Quantidade) VALUES('Tri', 4)

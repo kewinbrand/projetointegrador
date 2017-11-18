@@ -1,6 +1,6 @@
 package estruturaDados;
 
-public class Fila {
+public class Fila<T> {
 	
 	private static final int ARRAY_TAM_CRESCER = 10;
 	private int vezesArrayCresceu;
@@ -12,7 +12,7 @@ public class Fila {
 		this.criarFila();
 	}
 	
-	public void enfileirar(Object elemento) {
+	public void enfileirar(T elemento) {
 		if(this.filaCheia()) {
 			this.atualizarFila();
 		}
@@ -20,17 +20,18 @@ public class Fila {
 		this.elementos[this.ultimoElemento] = elemento;
 	}
 	
-	public Object desenfileirar() {
+	@SuppressWarnings("unchecked")
+	public T desenfileirar() {
 		if (this.filaVazia()) {
 			return null;
 		}
 		else {
-			this.ultimoElemento--;
-			for (int i = 0; i <= this.ultimoElemento; i++)
+			this.ultimoElemento--;			
+			/*for (int i = 0; i <= this.ultimoElemento; i++)
 			{
 				this.elementos[i] = this.elementos[i + 1];
-			};
-			return this.elementos[this.ultimoElemento + 1];
+			};*/
+			return (T) this.elementos[this.ultimoElemento + 1];
 		}
 	}
 	
