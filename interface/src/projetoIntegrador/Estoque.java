@@ -14,6 +14,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
+import javax.swing.ListSelectionModel;
 
 
 public class Estoque extends JDialog {
@@ -61,6 +62,7 @@ public class Estoque extends JDialog {
 		contentPane.add(scrlPaneTable);
 		
 		table = new JTable();
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrlPaneTable.setViewportView(table);
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon(Estoque.class.getResource("arquivos/estoque.png")));
