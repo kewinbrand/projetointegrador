@@ -4,8 +4,6 @@ package projetoIntegrador;
 import java.awt.Window;
 import java.sql.SQLException;
 
-import javax.swing.DefaultCellEditor;
-import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -58,14 +56,15 @@ public class MenuAplicacao {
 		estoque.table.setModel(model);
 		estoque.table.setDefaultEditor(Integer.class, new CellEditorInteger(new JTextField()));
 		estoque.table.setDefaultRenderer(Integer.class, new DefaultTableCellRenderer());
-		int tam = produtos.retornaTamanhoFila();
-		JComboBox<String> comboBoxProdutos = new JComboBox<String>();
-		for (int i = 0; i < tam; i++) {
-			Produto produto = produtos.item(i);		
-			comboBoxProdutos.addItem(produto.getCodigoProduto());
-		}
-		estoque.table.getColumnModel().getColumn(0).setCellEditor(new DefaultCellEditor(comboBoxProdutos));		
 		configurarFormPadrao(estoque);
+	}
+	
+	public static void abrirVendasGravadas() throws ExcecaoSql {
+		Fila<Venda> vendas = sistema.buscarVendasGravadas();
+		AbstractTableModel model = new TableModelVenda(vendas);
+		VendasGravadas vendasGravadas = VendasGravadas.mostrarVendasGravadas();
+		vendasGravadas.table.setModel(model);
+		configurarFormPadrao(vendasGravadas);
 	}
 	
 	public static void abrirCarrinho() {
@@ -102,7 +101,7 @@ public class MenuAplicacao {
 		configurarFormPadrao(compra);
 	}
 	
-	public static void gravarVendas() throws ExcecaoSql {
+	public static void gravarVendas() throws ExcecaoSql, ValidacaoException {
 		sistema.gravarVendas();
 	}
 	

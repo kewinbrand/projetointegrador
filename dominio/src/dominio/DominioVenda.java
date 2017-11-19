@@ -3,6 +3,7 @@ package dominio;
 import entidades.Venda;
 import estruturaDados.Fila;
 import utilidades.ExcecaoSql;
+import utilidades.ValidacaoException;
 
 public class DominioVenda {
 	
@@ -28,7 +29,10 @@ public class DominioVenda {
 		return this.repositorio.buscarEntidades();
 	}
 	
-	public void gravarVendas() throws ExcecaoSql {
+	public void gravarVendas() throws ExcecaoSql, ValidacaoException {
+		if(vendas.filaVazia()) {
+			throw new ValidacaoException("Não há nenhuma venda no carrinho");
+		}
 		for (int i = 0; i < vendas.retornaTamanhoFila(); i++) {
 			Venda venda = vendas.desenfileirar();
 			this.repositorio.inserirEntidade(venda);

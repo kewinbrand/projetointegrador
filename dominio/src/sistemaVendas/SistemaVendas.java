@@ -12,6 +12,7 @@ import entidades.Venda;
 import estruturaDados.Fila;
 import utilidades.ExcecaoSql;
 import utilidades.Utilidades;
+import utilidades.ValidacaoException;
 
 public class SistemaVendas {
 	
@@ -46,6 +47,10 @@ public class SistemaVendas {
 		return this._venda.buscarVendasEnfileiradas();
 	}
 	
+	public Fila<Venda> buscarVendasGravadas() throws ExcecaoSql{
+		return this._venda.buscarVendasGravadas();
+	}
+	
 	public void recriarBancoDados() throws ExcecaoSql {
 		try {
 			String sql = null;
@@ -62,7 +67,7 @@ public class SistemaVendas {
 		}
 	}
 	
-	public void gravarVendas() throws ExcecaoSql {
+	public void gravarVendas() throws ExcecaoSql, ValidacaoException {
 		this._venda.gravarVendas();
 	}
 	

@@ -39,6 +39,7 @@ public class Menu extends JFrame {
 	private JButton btnGravarVenda;
 	private JButton btnSair;
 	private JButton btnRecriar;
+	private JButton btnVendasGravadas;
 	
 	/**
 	 * Launch the application.
@@ -131,6 +132,14 @@ public class Menu extends JFrame {
 			defaultExceptionHandler(e);
 		}
 	}
+	
+	private void mostrarVendasGravadas() {
+		try {
+			MenuAplicacao.abrirVendasGravadas();
+		} catch (Exception e) {
+			defaultExceptionHandler(e);
+		}
+	}
 
 	/**
 	 * Create the frame.
@@ -161,7 +170,7 @@ public class Menu extends JFrame {
 				}			
 			}
 		});
-		btnNewButton.setBounds(60, 140, 155, 50);
+		btnNewButton.setBounds(60, 107, 155, 50);
 		contentPane.add(btnNewButton);
 		
 		btnCarrinhoDeCompras = new JButton("Carrinho");
@@ -177,7 +186,7 @@ public class Menu extends JFrame {
 		});
 		btnCarrinhoDeCompras.setBackground(SystemColor.scrollbar);
 		btnCarrinhoDeCompras.setFont(new Font("Candara", Font.BOLD, 19));
-		btnCarrinhoDeCompras.setBounds(60, 205, 155, 50);
+		btnCarrinhoDeCompras.setBounds(60, 172, 155, 50);
 		contentPane.add(btnCarrinhoDeCompras);
 		
 	    btnEstoque = new JButton("Estoque");
@@ -194,7 +203,7 @@ public class Menu extends JFrame {
 		});
 		btnEstoque.setBackground(SystemColor.scrollbar);
 		btnEstoque.setFont(new Font("Candara", Font.BOLD, 19));
-		btnEstoque.setBounds(274, 140, 155, 50);
+		btnEstoque.setBounds(274, 107, 155, 50);
 		contentPane.add(btnEstoque);
 		
 		btnTamanhoDoCarrinho = new JButton("Tamanho");
@@ -210,7 +219,7 @@ public class Menu extends JFrame {
 		});
 		btnTamanhoDoCarrinho.setBackground(SystemColor.scrollbar);
 		btnTamanhoDoCarrinho.setFont(new Font("Candara", Font.BOLD, 19));
-		btnTamanhoDoCarrinho.setBounds(274, 205, 155, 50);
+		btnTamanhoDoCarrinho.setBounds(274, 172, 155, 50);
 		contentPane.add(btnTamanhoDoCarrinho);
 		
 		btnItem = new JButton("1\u00BA Item");
@@ -227,7 +236,7 @@ public class Menu extends JFrame {
 		});
 		btnItem.setBackground(SystemColor.scrollbar);
 		btnItem.setFont(new Font("Candara", Font.BOLD, 19));
-		btnItem.setBounds(60, 268, 155, 50);
+		btnItem.setBounds(60, 235, 155, 50);
 		contentPane.add(btnItem);
 		
 		btnGravarVenda = new JButton("Gravar Vendas");
@@ -245,7 +254,7 @@ public class Menu extends JFrame {
 		
 		btnGravarVenda.setBackground(SystemColor.scrollbar);
 		btnGravarVenda.setFont(new Font("Candara", Font.BOLD, 19));
-		btnGravarVenda.setBounds(274, 268, 155, 50);
+		btnGravarVenda.setBounds(274, 235, 155, 50);
 		contentPane.add(btnGravarVenda);
 		
 		btnSair = new JButton("SAIR");
@@ -257,7 +266,7 @@ public class Menu extends JFrame {
 		});
 		btnSair.setBackground(SystemColor.scrollbar);
 		btnSair.setFont(new Font("Candara", Font.BOLD, 19));
-		btnSair.setBounds(60, 331, 369, 24);
+		btnSair.setBounds(60, 357, 369, 24);
 		contentPane.add(btnSair);
 		
 		btnRecriar = new JButton("Recriar Database");
@@ -274,6 +283,23 @@ public class Menu extends JFrame {
 		});
 		btnRecriar.setBounds(10, 477, 115, 23);
 		contentPane.add(btnRecriar);
+		
+		btnVendasGravadas = new JButton("Vendas Gravadas");
+		btnVendasGravadas.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				btnVendasGravadas.setEnabled(false);
+				try {
+					mostrarVendasGravadas();
+				} finally {
+					btnVendasGravadas.setEnabled(true);
+				}
+			}
+		});
+		btnVendasGravadas.setFont(new Font("Candara", Font.BOLD, 19));
+		btnVendasGravadas.setBackground(SystemColor.scrollbar);
+		btnVendasGravadas.setBounds(158, 296, 194, 50);
+		contentPane.add(btnVendasGravadas);
 		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setBounds(0, 0, 500, 528);

@@ -86,7 +86,7 @@ public class Fila<T> {
 		return (this.elementos.length == (this.ultimoElemento - 1)); 
 	}
 	
-	private boolean filaVazia() {
+	public boolean filaVazia() {
 		return (this.ultimoElemento == -1);
 	}
 	

@@ -21,8 +21,10 @@ public class CellEditorInteger extends DefaultCellEditor {
 	
 	@Override
     public boolean stopCellEditing() {
-        try {
-            int v = Integer.valueOf(textField.getText());
+        @SuppressWarnings("unused")
+		int v = 0;
+		try {
+            v = Integer.valueOf(textField.getText());
         } catch (NumberFormatException e) {
             textField.setBorder(red);
             return false;
