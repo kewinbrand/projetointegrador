@@ -31,6 +31,14 @@ public class Menu extends JFrame {
 	
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	private JButton btnNewButton;
+	private JButton btnCarrinhoDeCompras;
+	private JButton btnEstoque;
+	private JButton btnTamanhoDoCarrinho;
+	private JButton btnItem;
+	private JButton btnGravarVenda;
+	private JButton btnSair;
+	private JButton btnRecriar;
 	
 	/**
 	 * Launch the application.
@@ -70,9 +78,11 @@ public class Menu extends JFrame {
 		}
 	}
 	
-	private void conectarBancoDados() {
+	private void recriarBancoDados() {
 		try {
-			MenuAplicacao.recriarBancoDados();
+			if(JOptionPane.showConfirmDialog(rootPane, "Você tem certeza?", "Confirmação", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+				MenuAplicacao.recriarBancoDados();
+			}
 		} catch (Exception e) {
 			defaultExceptionHandler(e);
 		}
@@ -96,8 +106,12 @@ public class Menu extends JFrame {
 	}
 	
 	private void abrirQuantidadeItensCarrinho() {
-		String itensCarrinho = String.valueOf(MenuAplicacao.quantidadeItensCarrinho());
-		JOptionPane.showMessageDialog(rootPane, "Atualmente existem "+itensCarrinho+" itens no carrinho.", "Itens do Carrinho", DISPOSE_ON_CLOSE, null);
+		try {
+			String itensCarrinho = String.valueOf(MenuAplicacao.quantidadeItensCarrinho());
+			JOptionPane.showMessageDialog(rootPane, "Atualmente existem "+itensCarrinho+" itens no carrinho.", "Itens do Carrinho", DISPOSE_ON_CLOSE, null);
+		} catch (Exception e) {
+			defaultExceptionHandler(e);
+		}		
 	}
 	
 	private void abrirPrimeiroItemCarrinho() {
@@ -111,6 +125,7 @@ public class Menu extends JFrame {
 	
 	private void gravarVendasBancoDados() {
 		try {
+			MenuAplicacao.gravarVendas();
 			Utilidades.tocarSom(getClass().getResource("arquivos/somcaixa.wav").toString().replace("file:/", ""));
 		} catch (Exception e) {
 			defaultExceptionHandler(e);
@@ -132,22 +147,32 @@ public class Menu extends JFrame {
 		contentPane.setLayout(null);
 		
 		
-		JButton btnNewButton = new JButton("Realizar Venda");
+		btnNewButton = new JButton("Realizar Venda");
 		btnNewButton.setForeground(SystemColor.activeCaptionText);
 		btnNewButton.setBackground(SystemColor.scrollbar);
 		btnNewButton.setFont(new Font("Candara", Font.BOLD, 19));
 		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {			
-				abrirVendas();				
+			public void actionPerformed(ActionEvent arg0) {	
+				btnNewButton.setEnabled(false);
+				try {
+					abrirVendas();
+				} finally {
+					btnNewButton.setEnabled(true);
+				}			
 			}
 		});
 		btnNewButton.setBounds(60, 140, 155, 50);
 		contentPane.add(btnNewButton);
 		
-		JButton btnCarrinhoDeCompras = new JButton("Carrinho");
+		btnCarrinhoDeCompras = new JButton("Carrinho");
 		btnCarrinhoDeCompras.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				abrirCarrinho();
+				btnCarrinhoDeCompras.setEnabled(false);
+				try {
+					abrirCarrinho();
+				} finally {
+					btnCarrinhoDeCompras.setEnabled(true);
+				}
 			}
 		});
 		btnCarrinhoDeCompras.setBackground(SystemColor.scrollbar);
@@ -155,11 +180,16 @@ public class Menu extends JFrame {
 		btnCarrinhoDeCompras.setBounds(60, 205, 155, 50);
 		contentPane.add(btnCarrinhoDeCompras);
 		
-		JButton btnEstoque = new JButton("Estoque");
+	    btnEstoque = new JButton("Estoque");
 		btnEstoque.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				abrirEstoque();
+				btnEstoque.setEnabled(false);
+				try {
+					abrirEstoque();
+				} finally {
+					btnEstoque.setEnabled(true);
+				}
 			}
 		});
 		btnEstoque.setBackground(SystemColor.scrollbar);
@@ -167,65 +197,79 @@ public class Menu extends JFrame {
 		btnEstoque.setBounds(274, 140, 155, 50);
 		contentPane.add(btnEstoque);
 		
-		JButton btnTamanhoDoCarrinho = new JButton("Tamanho");
+		btnTamanhoDoCarrinho = new JButton("Tamanho");
 		btnTamanhoDoCarrinho.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				abrirQuantidadeItensCarrinho();
+				btnTamanhoDoCarrinho.setEnabled(false);
+				try {
+					abrirQuantidadeItensCarrinho();
+				} finally {
+					btnTamanhoDoCarrinho.setEnabled(true);
+				}
 			}
 		});
 		btnTamanhoDoCarrinho.setBackground(SystemColor.scrollbar);
 		btnTamanhoDoCarrinho.setFont(new Font("Candara", Font.BOLD, 19));
-		btnTamanhoDoCarrinho.setToolTipText("");
-		btnTamanhoDoCarrinho.setSelectedIcon(new ImageIcon());
 		btnTamanhoDoCarrinho.setBounds(274, 205, 155, 50);
 		contentPane.add(btnTamanhoDoCarrinho);
 		
-		JButton btnItem = new JButton("1\u00BA Item");
+		btnItem = new JButton("1\u00BA Item");
 		btnItem.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				abrirPrimeiroItemCarrinho();
+				btnItem.setEnabled(false);
+				try {
+					abrirPrimeiroItemCarrinho();
+				} finally {
+					btnItem.setEnabled(true);
+				}
 			}
 		});
 		btnItem.setBackground(SystemColor.scrollbar);
-		btnItem.setToolTipText("");
 		btnItem.setFont(new Font("Candara", Font.BOLD, 19));
 		btnItem.setBounds(60, 268, 155, 50);
 		contentPane.add(btnItem);
 		
-		JButton btnGravarVenda = new JButton("Gravar Vendas");
+		btnGravarVenda = new JButton("Gravar Vendas");
 		btnGravarVenda.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				gravarVendasBancoDados();
+				btnGravarVenda.setEnabled(false);
+				try {
+					gravarVendasBancoDados();
+				} finally {
+					btnGravarVenda.setEnabled(true);
+				}
 			}
 		});
 		
 		btnGravarVenda.setBackground(SystemColor.scrollbar);
-		btnGravarVenda.setToolTipText("");
 		btnGravarVenda.setFont(new Font("Candara", Font.BOLD, 19));
 		btnGravarVenda.setBounds(274, 268, 155, 50);
 		contentPane.add(btnGravarVenda);
 		
-		JButton btnSair = new JButton("SAIR");
+		btnSair = new JButton("SAIR");
 		btnSair.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-			
+				MenuAplicacao.sair();
 				dispose();
-				
 			}
 		});
 		btnSair.setBackground(SystemColor.scrollbar);
-		btnSair.setToolTipText("");
 		btnSair.setFont(new Font("Candara", Font.BOLD, 19));
 		btnSair.setBounds(60, 331, 369, 24);
 		contentPane.add(btnSair);
 		
-		JButton btnRecriar = new JButton("Recriar Database");
+		btnRecriar = new JButton("Recriar Database");
 		btnRecriar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				conectarBancoDados();
+				btnRecriar.setEnabled(false);
+				try {
+					recriarBancoDados();
+				} finally {
+					btnRecriar.setEnabled(true);
+				}
 			}
 		});
 		btnRecriar.setBounds(10, 477, 115, 23);

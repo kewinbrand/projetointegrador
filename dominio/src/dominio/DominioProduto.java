@@ -29,7 +29,9 @@ public class DominioProduto {
 				produto.setQtdLoteComprar(rs.getInt("QtdLoteComprar"));				
 				
 				fila.enfileirar(produto);
-			}		
+			}	
+			
+			preparedStatement.close();
 			
 		} catch (SQLException e) {
 			throw new ExcecaoSql(e.getMessage());

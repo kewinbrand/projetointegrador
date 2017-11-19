@@ -61,6 +61,10 @@ public class SistemaVendas {
 		}
 	}
 	
+	public void gravarVendas() throws ExcecaoSql {
+		this._venda.gravarVendas();
+	}
+	
 	public void IniciarSistema() throws ExcecaoSql {
 		
 		try {

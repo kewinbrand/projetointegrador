@@ -64,6 +64,10 @@ public class Venda {
 		if(valUnit.intValue() == 0) {
 			msgErro.append("O valor unitário não pode ser 0.");
 		}		
+		BigDecimal mltp = valUnit.multiply(new BigDecimal(qtd));
+		if(_desconto.compareTo(mltp) == 1) {
+			msgErro.append("O desconto não pode ser maior que o valor unitário.");
+		}
 		
 		if(msgErro.length() > 0) {
 			throw new ValidacaoException(msgErro.toString());
@@ -80,6 +84,10 @@ public class Venda {
 		}
 		if(venda.getValorUn().intValue() == 0) {
 			msgErro.append("O valor unitário não pode ser 0.");
+		}
+		BigDecimal val = venda.getValorUn().multiply(new BigDecimal(venda.getQuantidade()));
+		if(venda.getDesconto().compareTo(val) == 1) {
+			msgErro.append("O desconto não pode ser maior que o valor unitário.");
 		}
 		if(msgErro.length() != 0) {
 			throw new ValidacaoException(msgErro.toString());

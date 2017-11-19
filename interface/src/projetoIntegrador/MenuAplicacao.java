@@ -2,9 +2,11 @@ package projetoIntegrador;
 
 
 import java.awt.Window;
+import java.sql.SQLException;
 
 import javax.swing.table.AbstractTableModel;
 
+import conexaoBancoDados.Conexao;
 import entidades.Produto;
 import entidades.Venda;
 import estruturaDados.Fila;
@@ -83,8 +85,20 @@ public class MenuAplicacao {
 		configurarFormPadrao(compra);
 	}
 	
+	public static void gravarVendas() throws ExcecaoSql {
+		sistema.gravarVendas();
+	}
+	
 	public static void recriarBancoDados() throws ExcecaoSql {
 		sistema.recriarBancoDados();
+	}
+	
+	public static void sair() {
+		try {
+			Conexao.getInstance().desconectarBancoDados();
+		} catch (SQLException e) {
+			//podemos ignorar
+		}
 	}
 
 }
