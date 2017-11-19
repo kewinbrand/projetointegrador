@@ -4,8 +4,9 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 import conexaoBancoDados.Conexao;
-import dominio.DominioProduto;
+import dominio.RepositorioProduto;
 import dominio.DominioVenda;
+import dominio.RepositorioAbstract;
 import entidades.Produto;
 import entidades.Venda;
 import estruturaDados.Fila;
@@ -33,8 +34,8 @@ public class SistemaVendas {
 	}
 	
 	public Fila<Produto> buscarProdutos() throws ExcecaoSql{
-		DominioProduto _produto = new DominioProduto();
-		return _produto.buscarProdutos();
+		RepositorioAbstract<Produto> _produto = new RepositorioProduto();
+		return _produto.buscarEntidades();
 	}	
 	
 	public Venda buscarPrimeiraVendaEnfileirada() {

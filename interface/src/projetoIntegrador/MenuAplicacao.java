@@ -4,9 +4,16 @@ package projetoIntegrador;
 import java.awt.Window;
 import java.sql.SQLException;
 
+import javax.swing.DefaultCellEditor;
+import javax.swing.JComboBox;
+import javax.swing.JTextField;
 import javax.swing.table.AbstractTableModel;
+import javax.swing.table.DefaultTableCellRenderer;
 
 import conexaoBancoDados.Conexao;
+import dominio.DominioProduto;
+import dominio.RepositorioAbstract;
+import dominio.RepositorioProduto;
 import entidades.Produto;
 import entidades.Venda;
 import estruturaDados.Fila;
@@ -44,10 +51,20 @@ public class MenuAplicacao {
 	}
 	
 	public static void abrirEstoque() throws ExcecaoSql {
-		Fila<Produto> produtos = sistema.buscarProdutos();
-		AbstractTableModel model = new TableModelProduto(produtos);
-		Estoque estoque = Estoque.abrirEstoque();
+		RepositorioAbstract<Produto> repositorio = new RepositorioProduto();
+		Fila<Produto> produtos = repositorio.buscarEntidades();
+		AbstractTableModel model = new TableModelProduto(new DominioProduto(), produtos);
+		Estoque estoque = Estoque.abrirEstoque((TableModelProduto)model);
 		estoque.table.setModel(model);
+		estoque.table.setDefaultEditor(Integer.class, new CellEditorInteger(new JTextField()));
+		estoque.table.setDefaultRenderer(Integer.class, new DefaultTableCellRenderer());
+		int tam = produtos.retornaTamanhoFila();
+		JComboBox<String> comboBoxProdutos = new JComboBox<String>();
+		for (int i = 0; i < tam; i++) {
+			Produto produto = produtos.item(i);		
+			comboBoxProdutos.addItem(produto.getCodigoProduto());
+		}
+		estoque.table.getColumnModel().getColumn(0).setCellEditor(new DefaultCellEditor(comboBoxProdutos));		
 		configurarFormPadrao(estoque);
 	}
 	
