@@ -17,10 +17,10 @@ public class RepositorioProduto extends RepositorioAbstract<Produto> {
 	private static final String InsertString = "INSERT INTO PRODUTO (Produto, NomeCompleto, QtdMiniEstoque, QtdLoteComprar) values (?, ?, ?, ?)";
 	private static final String SelectOneString = "SELECT Produto, NomeCompleto, QtdMiniEstoque, QtdLoteComprar FROM PRODUTO WHERE Produto = ?";
 	private static final String UpdateString = "UPDATE PRODUTO SET NomeCompleto = ?, QtdMiniEstoque = ?, QtdLoteComprar = ? WHERE Produto = ?";	
-	private static final String ProdMovimentacaoString = "SELECT PRODUTO.Produto, NomeCompleto, QtdMiniEstoque, QtdLoteComprar, SUM(QUANTIDADE) as SaldoDisponivel " + 
-														 "FROM MOVIMENTOESTOQUE " + 
-														 "INNER JOIN PRODUTO ON PRODUTO.Produto = MOVIMENTOESTOQUE.Produto " + 
-														 "GROUP BY PRODUTO.Produto, NomeCompleto, QtdMiniEstoque, QtdLoteComprar ";
+	private static final String ProdMovimentacaoString = "SELECT PRODUTO.Produto, NomeCompleto, QtdMiniEstoque, QtdLoteComprar, ISNULL(SUM(QUANTIDADE), 0) as SaldoDisponivel "+ 
+														  "FROM PRODUTO "+ 
+														  "LEFT JOIN MOVIMENTOESTOQUE ON PRODUTO.Produto = MOVIMENTOESTOQUE.Produto "+
+														  "GROUP BY PRODUTO.Produto, NomeCompleto, QtdMiniEstoque, QtdLoteComprar ";
 
 	@Override
 	public void atualizarEntidade(Produto entidade) throws ExcecaoSql {
