@@ -58,7 +58,7 @@ public class VendasGravadas extends JDialog {
 		scrollPane.setViewportView(table);
 		
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon(VendasGravadas.class.getResource("arquivos/carrinho.png")));
+		lblNewLabel.setIcon(new ImageIcon(VendasGravadas.class.getResource("arquivos/vendasregistradas.png")));
 		lblNewLabel.setBounds(0, 0, 493, 530);
 		contentPane.add(lblNewLabel);
 	}

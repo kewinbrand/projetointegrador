@@ -7,6 +7,7 @@ import javax.swing.table.AbstractTableModel;
 
 import dominio.DominioProduto;
 import entidades.Produto;
+import entidades.ProdutoMovimentacao;
 import estruturaDados.Fila;
 import utilidades.ExcecaoSql;
 import utilidades.ValidacaoException;
@@ -15,18 +16,18 @@ public class TableModelProduto extends AbstractTableModel {
 	
 	private static final long serialVersionUID = 1L;
 	
-	private String[] colunas = {"Codigo Produto" , "Descrição" ,"Qtd. Mín. Estoque", "Qtd. Lote Comprar"};
+	private String[] colunas = {"Codigo Produto" , "Descrição" ,"Qtd. Mín. Estoque", "Qtd. Lote Comprar", "Saldo Disponível"};
 	
-	private ArrayList<Produto> produtos;
+	private ArrayList<ProdutoMovimentacao> produtos;
 	private DominioProduto dominioProduto;
 	
-	public TableModelProduto(DominioProduto dominioProduto, Fila<Produto> produtos) {
+	public TableModelProduto(DominioProduto dominioProduto, Fila<ProdutoMovimentacao> produtos) {
 		super();
 		this.dominioProduto = dominioProduto;
-		this.produtos = new ArrayList<Produto>();
+		this.produtos = new ArrayList<ProdutoMovimentacao>();
 		int tam = produtos.retornaTamanhoFila();
 		for (int i = 0; i < tam; i++) {
-			Produto produto = produtos.desenfileirar();
+			ProdutoMovimentacao produto = produtos.desenfileirar();
 			this.produtos.add(produto);
 		}
 	}
@@ -43,7 +44,7 @@ public class TableModelProduto extends AbstractTableModel {
 	
 	@Override
 	public boolean isCellEditable(int rowIndex, int columnIndex) {
-		return !(columnIndex == 0);
+		return !(columnIndex == 0 || columnIndex == 4);
 	}
 
 	@Override
@@ -53,7 +54,7 @@ public class TableModelProduto extends AbstractTableModel {
 	
 	@Override
 	public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
-		Produto produto = this.produtos.get(rowIndex);
+		ProdutoMovimentacao produto = this.produtos.get(rowIndex);
 		int value = 0;
 		switch(columnIndex) {
 			case 1: produto.setNomeCompleto((String)aValue);
@@ -80,6 +81,7 @@ public class TableModelProduto extends AbstractTableModel {
 		  case 1: return String.class;
 		  case 2: return Integer.class;
 		  case 3: return Integer.class;
+		  case 4: return Integer.class;
 		}
 		return null;
     }
@@ -91,12 +93,13 @@ public class TableModelProduto extends AbstractTableModel {
 			case 1: return this.produtos.get(linha).getNomeCompleto();
 			case 2: return this.produtos.get(linha).getQtdMinEstoque();
 			case 3: return this.produtos.get(linha).getQtdLoteComprar();
+			case 4: return this.produtos.get(linha).getSaldoDisponivel();
 		}
 		return null;
 	}
 	
 	public void adicionarProduto(String codigoProduto) throws ExcecaoSql, ValidacaoException {
-		Produto produto = new Produto();
+		ProdutoMovimentacao produto = new ProdutoMovimentacao();
 		produto.setCodigoProduto(codigoProduto);
 		this.dominioProduto.adicionarProduto(produto);
 		int tamanhoAntigo = getRowCount();

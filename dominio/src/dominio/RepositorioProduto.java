@@ -8,6 +8,7 @@ import estruturaDados.Fila;
 import utilidades.ExcecaoSql;
 import conexaoBancoDados.Conexao;
 import entidades.Produto;
+import entidades.ProdutoMovimentacao;
 
 public class RepositorioProduto extends RepositorioAbstract<Produto> {
 	
@@ -15,7 +16,11 @@ public class RepositorioProduto extends RepositorioAbstract<Produto> {
 	private static final String DeleteString = "DELETE FROM PRODUTO WHERE Produto = ?";
 	private static final String InsertString = "INSERT INTO PRODUTO (Produto, NomeCompleto, QtdMiniEstoque, QtdLoteComprar) values (?, ?, ?, ?)";
 	private static final String SelectOneString = "SELECT Produto, NomeCompleto, QtdMiniEstoque, QtdLoteComprar FROM PRODUTO WHERE Produto = ?";
-	private static final String UpdateString = "UPDATE PRODUTO SET NomeCompleto = ?, QtdMiniEstoque = ?, QtdLoteComprar = ? WHERE Produto = ?";
+	private static final String UpdateString = "UPDATE PRODUTO SET NomeCompleto = ?, QtdMiniEstoque = ?, QtdLoteComprar = ? WHERE Produto = ?";	
+	private static final String ProdMovimentacaoString = "SELECT PRODUTO.Produto, NomeCompleto, QtdMiniEstoque, QtdLoteComprar, SUM(QUANTIDADE) as SaldoDisponivel " + 
+														 "FROM MOVIMENTOESTOQUE " + 
+														 "INNER JOIN PRODUTO ON PRODUTO.Produto = MOVIMENTOESTOQUE.Produto " + 
+														 "GROUP BY PRODUTO.Produto, NomeCompleto, QtdMiniEstoque, QtdLoteComprar ";
 
 	@Override
 	public void atualizarEntidade(Produto entidade) throws ExcecaoSql {
@@ -126,6 +131,34 @@ public class RepositorioProduto extends RepositorioAbstract<Produto> {
 		} catch (SQLException e) {
 			throw new ExcecaoSql(e.getMessage());
 		}	
+	}
+	
+	public Fila<ProdutoMovimentacao> buscarProdutosMovimentacao() throws ExcecaoSql{
+		Fila<ProdutoMovimentacao> fila = new Fila<ProdutoMovimentacao>();
+		PreparedStatement preparedStatement = null;
+		try {
+			preparedStatement = Conexao.getInstance().buscarConexao().prepareStatement(ProdMovimentacaoString);
+			ResultSet rs = preparedStatement.executeQuery();
+			
+			while(rs.next()) {
+				ProdutoMovimentacao produto = new ProdutoMovimentacao();
+				
+				produto.setCodigoProduto(rs.getString("Produto"));
+				produto.setNomeCompleto(rs.getString("NomeCompleto"));
+				produto.setQtdMinEstoque(rs.getInt("QtdMiniEstoque"));
+				produto.setQtdLoteComprar(rs.getInt("QtdLoteComprar"));
+				produto.setSaldoDisponivel(rs.getInt("SaldoDisponivel"));
+				
+				fila.enfileirar(produto);
+			}	
+			
+			preparedStatement.close();
+			
+		} catch (SQLException e) {
+			throw new ExcecaoSql(e.getMessage());
+		}
+		
+		return fila;
 	}
 	
 

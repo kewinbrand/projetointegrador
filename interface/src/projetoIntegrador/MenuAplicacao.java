@@ -13,6 +13,7 @@ import dominio.DominioProduto;
 import dominio.RepositorioAbstract;
 import dominio.RepositorioProduto;
 import entidades.Produto;
+import entidades.ProdutoMovimentacao;
 import entidades.Venda;
 import estruturaDados.Fila;
 import sistemaVendas.SistemaVendas;
@@ -50,7 +51,7 @@ public class MenuAplicacao {
 	
 	public static void abrirEstoque() throws ExcecaoSql {
 		RepositorioAbstract<Produto> repositorio = new RepositorioProduto();
-		Fila<Produto> produtos = repositorio.buscarEntidades();
+		Fila<ProdutoMovimentacao> produtos = ((RepositorioProduto) repositorio).buscarProdutosMovimentacao();
 		AbstractTableModel model = new TableModelProduto(new DominioProduto(), produtos);
 		Estoque estoque = Estoque.abrirEstoque((TableModelProduto)model);
 		estoque.table.setModel(model);

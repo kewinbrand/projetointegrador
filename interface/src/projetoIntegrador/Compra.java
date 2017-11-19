@@ -44,16 +44,19 @@ public class Compra extends JDialog {
 		frame.sistema = sistema;
 		frame.setResizable(false);
 		frame.setSize(500,550);
+		frame.limparCampos();
 		return frame;
 	}
 	
 	private void limparCampos() {
 		this.textFieldQuantidade.setText(null);
-		this.textFieldValor.setText(null);
-		this.textFieldDesc.setText(null);
-		this.textFieldAliq.setText(null);
+		this.textFieldValor.setText("0");
+		this.textFieldDesc.setText("0");
+		this.textFieldAliq.setText("0");
 		this.textFieldObs.setText(null);
-		this.comboProduto.setSelectedIndex(0);
+		if(this.comboProduto.getItemCount() > 0) {
+			this.comboProduto.setSelectedIndex(0);
+		}
 	}
 	
 	private void realizarVenda() {
