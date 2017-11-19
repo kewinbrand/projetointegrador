@@ -270,6 +270,8 @@ public class Menu extends JFrame {
 		contentPane.add(btnSair);
 		
 		btnRecriar = new JButton("Recriar Database");
+		btnRecriar.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		btnRecriar.setBackground(SystemColor.scrollbar);
 		btnRecriar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
@@ -281,7 +283,7 @@ public class Menu extends JFrame {
 				}
 			}
 		});
-		btnRecriar.setBounds(10, 477, 115, 23);
+		btnRecriar.setBounds(10, 477, 131, 23);
 		contentPane.add(btnRecriar);
 		
 		btnVendasGravadas = new JButton("Vendas Gravadas");
