@@ -16,9 +16,6 @@ import javax.swing.JTable;
 
 public class Carrinho extends JDialog {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	public JPanel contentPane;
 	public JTable table;

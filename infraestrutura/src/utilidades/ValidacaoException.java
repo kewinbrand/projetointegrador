@@ -6,9 +6,6 @@ public class ValidacaoException extends Exception {
 		super(exceptionMessage);
 	}
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	
 	@Override

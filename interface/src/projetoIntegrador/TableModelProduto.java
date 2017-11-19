@@ -24,13 +24,11 @@ public class TableModelProduto extends AbstractTableModel {
 
 	@Override
 	public int getColumnCount() {
-		// TODO Auto-generated method stub
 		return this.colunas.length;
 	}
 
 	@Override
 	public int getRowCount() {
-		// TODO Auto-generated method stub
 		return this.produtos.retornaTamanhoFila();
 	}
 
