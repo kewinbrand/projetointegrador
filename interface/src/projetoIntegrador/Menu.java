@@ -170,7 +170,7 @@ public class Menu extends JFrame {
 				}			
 			}
 		});
-		btnNewButton.setBounds(60, 107, 155, 50);
+		btnNewButton.setBounds(60, 109, 155, 50);
 		contentPane.add(btnNewButton);
 		
 		btnCarrinhoDeCompras = new JButton("Carrinho");
@@ -186,7 +186,7 @@ public class Menu extends JFrame {
 		});
 		btnCarrinhoDeCompras.setBackground(SystemColor.scrollbar);
 		btnCarrinhoDeCompras.setFont(new Font("Candara", Font.BOLD, 19));
-		btnCarrinhoDeCompras.setBounds(60, 172, 155, 50);
+		btnCarrinhoDeCompras.setBounds(60, 175, 155, 50);
 		contentPane.add(btnCarrinhoDeCompras);
 		
 	    btnEstoque = new JButton("Estoque");
@@ -203,7 +203,7 @@ public class Menu extends JFrame {
 		});
 		btnEstoque.setBackground(SystemColor.scrollbar);
 		btnEstoque.setFont(new Font("Candara", Font.BOLD, 19));
-		btnEstoque.setBounds(274, 107, 155, 50);
+		btnEstoque.setBounds(274, 109, 155, 50);
 		contentPane.add(btnEstoque);
 		
 		btnTamanhoDoCarrinho = new JButton("Tamanho");
@@ -219,7 +219,7 @@ public class Menu extends JFrame {
 		});
 		btnTamanhoDoCarrinho.setBackground(SystemColor.scrollbar);
 		btnTamanhoDoCarrinho.setFont(new Font("Candara", Font.BOLD, 19));
-		btnTamanhoDoCarrinho.setBounds(274, 172, 155, 50);
+		btnTamanhoDoCarrinho.setBounds(274, 175, 155, 50);
 		contentPane.add(btnTamanhoDoCarrinho);
 		
 		btnItem = new JButton("1\u00BA Item");
@@ -266,7 +266,7 @@ public class Menu extends JFrame {
 		});
 		btnSair.setBackground(SystemColor.scrollbar);
 		btnSair.setFont(new Font("Candara", Font.BOLD, 19));
-		btnSair.setBounds(60, 357, 369, 24);
+		btnSair.setBounds(60, 350, 369, 24);
 		contentPane.add(btnSair);
 		
 		btnRecriar = new JButton("Recriar Database");
@@ -298,7 +298,7 @@ public class Menu extends JFrame {
 		});
 		btnVendasGravadas.setFont(new Font("Candara", Font.BOLD, 19));
 		btnVendasGravadas.setBackground(SystemColor.scrollbar);
-		btnVendasGravadas.setBounds(158, 296, 194, 50);
+		btnVendasGravadas.setBounds(139, 293, 194, 50);
 		contentPane.add(btnVendasGravadas);
 		
 		JLabel lblNewLabel = new JLabel("");
