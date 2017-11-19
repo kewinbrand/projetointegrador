@@ -2,7 +2,7 @@ package estruturaDados;
 
 public class Fila<T> {
 	
-	private static final int ARRAY_TAM_CRESCER = 10;
+	private static final int ARRAY_TAM_CRESCER = 5;
 	private int vezesArrayCresceu;
 	private int ultimoElemento;
 	
@@ -69,7 +69,7 @@ public class Fila<T> {
 		
 	private void atualizarFila() {
 		this.vezesArrayCresceu++;
-		Object[] elem = new Object[this.ultimoElemento];
+		Object[] elem = new Object[this.ultimoElemento + 1];
 		for (int i = 0; i < elem.length; i++) {
 			elem[i] = this.elementos[i];
 		}
@@ -83,7 +83,7 @@ public class Fila<T> {
 	}
 	
 	private boolean filaCheia() {
-		return (this.elementos.length == (this.ultimoElemento - 1)); 
+		return (this.elementos.length == (this.ultimoElemento + 1)); 
 	}
 	
 	public boolean filaVazia() {
