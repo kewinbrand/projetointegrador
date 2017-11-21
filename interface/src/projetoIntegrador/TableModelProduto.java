@@ -26,7 +26,7 @@ public class TableModelProduto extends AbstractTableModel {
 		this.dominioProduto = dominioProduto;
 		this.produtos = new ArrayList<ProdutoMovimentacao>();
 		int tam = produtos.retornaTamanhoFila();
-		for (int i = 0; i < tam; i++) {
+		for (int i = 0; i <= tam; i++) {
 			ProdutoMovimentacao produto = produtos.desenfileirar();
 			this.produtos.add(produto);
 		}

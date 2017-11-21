@@ -42,7 +42,7 @@ public class MenuAplicacao {
 		Fila<Produto> produtos = sistema.buscarProdutos();
 		Compra compra = Compra.novaVenda(sistema);			
 		int tam = produtos.retornaTamanhoFila();
-		for (int i = 0; i < tam; i++) {
+		for (int i = 0; i <= tam; i++) {
 			Produto produto = produtos.desenfileirar();			
 			compra.comboProduto.addItem(produto.getCodigoProduto());			
 		}	

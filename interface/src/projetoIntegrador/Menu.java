@@ -108,7 +108,7 @@ public class Menu extends JFrame {
 	
 	private void abrirQuantidadeItensCarrinho() {
 		try {
-			String itensCarrinho = String.valueOf(MenuAplicacao.quantidadeItensCarrinho());
+			String itensCarrinho = String.valueOf(MenuAplicacao.quantidadeItensCarrinho()+1);
 			JOptionPane.showMessageDialog(rootPane, "Atualmente existem "+itensCarrinho+" itens no carrinho.", "Itens do Carrinho", DISPOSE_ON_CLOSE, null);
 		} catch (Exception e) {
 			defaultExceptionHandler(e);

@@ -18,8 +18,8 @@ public class SistemaVendas {
 	
     private DominioVenda _venda;
     
-    private static String CONEXAO = "jdbc:sqlserver://localhost:1433;databaseName=PROJETO_INTEGRADOR;integratedSecurity=true;";
-    private static String CONEXAO_MASTER = "jdbc:sqlserver://localhost:1433;databaseName=master;integratedSecurity=true;";
+    private static String CONEXAO = "jdbc:sqlserver://ANGELO-PC\\SQLEXPRESS:1433;databaseName=PROJETO_INTEGRADOR;integratedSecurity=true;";
+    private static String CONEXAO_MASTER = "jdbc:sqlserver://ANGELO-PC\\SQLEXPRESS:1433;databaseName=master;integratedSecurity=true;";
 	
 	public SistemaVendas() {
 		this._venda = new DominioVenda();

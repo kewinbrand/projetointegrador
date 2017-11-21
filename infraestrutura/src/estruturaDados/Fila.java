@@ -26,12 +26,13 @@ public class Fila<T> {
 			return null;
 		}
 		else {
-			this.ultimoElemento--;			
-			/*for (int i = 0; i <= this.ultimoElemento; i++)
+			this.ultimoElemento--;	
+			T elemento = (T) this.elementos[0];
+			for (int i = 0; i <= this.ultimoElemento; i++)
 			{
 				this.elementos[i] = this.elementos[i + 1];
-			};*/
-			return (T) this.elementos[this.ultimoElemento + 1];
+			};
+			return elemento;
 		}
 	}
 	
@@ -58,7 +59,7 @@ public class Fila<T> {
 	}
 	
 	public int retornaTamanhoFila() {
-		return this.ultimoElemento + 1;
+		return this.ultimoElemento;
 	}
 	
 	private void criarFila() {

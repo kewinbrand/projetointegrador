@@ -33,7 +33,7 @@ public class DominioVenda {
 		if(vendas.filaVazia()) {
 			throw new ValidacaoException("Não há nenhuma venda no carrinho");
 		}
-		for (int i = 0; i < vendas.retornaTamanhoFila(); i++) {
+		for (int i = 0; i <= vendas.retornaTamanhoFila(); i++) {
 			Venda venda = vendas.desenfileirar();
 			this.repositorio.inserirEntidade(venda);
 		}	

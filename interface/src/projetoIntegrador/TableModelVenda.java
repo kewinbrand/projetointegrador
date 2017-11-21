@@ -29,7 +29,7 @@ public class TableModelVenda extends AbstractTableModel {
 
 	@Override
 	public int getRowCount() {
-		return this.vendas.retornaTamanhoFila();
+		return this.vendas.retornaTamanhoFila() + 1;
 	}
 
 	@Override
